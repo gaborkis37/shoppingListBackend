@@ -1,10 +1,11 @@
 package com.shoppinglist.backend.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shoppinglist.backend.model.Product;
-import com.shoppinglist.backend.model.User;
 import com.shoppinglist.backend.repository.ProductRepository;
 
 @Service
@@ -18,12 +19,14 @@ public class ProductService {
 		this.productRepo = productRepo;
 	}
 
-	public Iterable<Product> listAllProducts() {
-		return productRepo.findAll();
+	
+	
+	public List<Product> getProducts(String holdername) {
+		return productRepo.findByHolderName(holdername);
 	}
-
-	public Iterable<Product> listAllUsersProduct(User user) {
-		return productRepo.findByUser(user);
+	
+	public void addProduct(String name, int price, String holderName) {
+		productRepo.save(new Product(name, price, holderName));
 	}
 
 }

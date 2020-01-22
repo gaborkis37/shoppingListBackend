@@ -18,10 +18,22 @@ public class Product {
 	@ManyToOne
 	@JsonBackReference
 	private User user;
+	private String holderName;
 
 	public Product() {
 		super();
 	}
+	
+	
+
+	public Product(String name, int price, String holderName) {
+		super();
+		this.name = name;
+		this.price = price;
+		this.holderName = holderName;
+	}
+
+
 
 	public Product(String name, int price) {
 		super();
@@ -36,6 +48,16 @@ public class Product {
 		this.name = name;
 		this.price = price;
 		this.user = user;
+	}
+	
+	
+
+	public String getHolderName() {
+		return holderName;
+	}
+
+	public void setHolderName(String holderName) {
+		this.holderName = holderName;
 	}
 
 	public String getName() {
