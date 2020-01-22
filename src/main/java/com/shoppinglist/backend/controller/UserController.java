@@ -1,6 +1,10 @@
 package com.shoppinglist.backend.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,11 +24,11 @@ public class UserController {
 		super();
 		this.userService = userService;
 	}
-
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public Iterable<User> listUsers() {
-		return userService.listAllUsers();
-	}
+	
+	@GetMapping("/users")
+    public List<User> getUsers() {
+        return (List<User>) userService.listAllUsers();
+    }
 
 	@RequestMapping(value = "/userproducts", method = RequestMethod.GET)
 	public Iterable<Product> listUsersProducts(Long id) {
@@ -32,8 +36,9 @@ public class UserController {
 		return user.getProducts();
 	}
 
-	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public User create(@RequestBody User user) {
-		return userService.saveUser(user);
-	}
+	
+	@PostMapping("/users")
+    void addUser(@RequestBody User user) {
+		userService.saveUser(user);
+    }
 }

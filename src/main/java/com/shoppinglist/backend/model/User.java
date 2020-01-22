@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class User {
@@ -19,7 +19,7 @@ public class User {
 	private String email;
 	private String password;
 	@OneToMany(mappedBy = "user")
-	@JsonBackReference
+	@JsonManagedReference 
 	private List<Product> products;
 	
 	

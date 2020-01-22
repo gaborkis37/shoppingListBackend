@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Product {
@@ -16,7 +16,7 @@ public class Product {
 	private String name;
 	private int price;
 	@ManyToOne
-	@JsonManagedReference
+	@JsonBackReference
 	private User user;
 
 	public Product() {
