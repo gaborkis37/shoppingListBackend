@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.shoppinglist.backend.model.Product;
 import com.shoppinglist.backend.model.User;
 import com.shoppinglist.backend.service.UserService;
 
@@ -22,21 +21,14 @@ public class UserController {
 		super();
 		this.userService = userService;
 	}
-	
-	@RequestMapping(value = "/listUsers", produces="application/json")
-    public List<User> getUsers() {
-        return (List<User>) userService.listAllUsers();
-    }
 
-	@RequestMapping(value = "/userproducts", produces="application/json")
-	public Iterable<Product> listUsersProducts(Long id) {
-		User user = userService.findOneUser(id).orElse(null);
-		return user.getProducts();
+	@RequestMapping(value = "/listUsers", produces = "application/json")
+	public List<User> getUsers() {
+		return (List<User>) userService.listAllUsers();
 	}
 
-	
-	@PostMapping(value = "/addUsers", produces="application/json")
-    void addUser(@RequestBody User user) {
+	@PostMapping(value = "/addUsers", produces = "application/json")
+	void addUser(@RequestBody User user) {
 		userService.saveUser(user);
-    }
+	}
 }

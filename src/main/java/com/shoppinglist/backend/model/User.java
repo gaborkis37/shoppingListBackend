@@ -1,13 +1,10 @@
 package com.shoppinglist.backend.model;
 
-import java.util.List;
-
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class User {
@@ -18,9 +15,8 @@ public class User {
 	private String username;
 	private String email;
 	private String password;
-	@OneToMany(mappedBy = "user")
-	@JsonManagedReference 
-	private List<Product> products;
+	@Enumerated(EnumType.STRING)
+    private Role role;
 	
 	
 
@@ -58,12 +54,15 @@ public class User {
 		this.password = password;
 	}
 
-	public List<Product> getProducts() {
-		return products;
+	public Role getRole() {
+		return role;
 	}
 
-	public void setProducts(List<Product> products) {
-		this.products = products;
+	public void setRole(Role role) {
+		this.role = role;
 	}
+
+
+	
 
 }
