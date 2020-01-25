@@ -20,10 +20,6 @@ public class UserService {
 	}
 	
 	
-	public Iterable<User> listAllUsers() {
-		return userRepo.findAll();
-	}
-	
 	public Optional<User> findOneUser(Long id) {
 		return userRepo.findById(id);
 	}

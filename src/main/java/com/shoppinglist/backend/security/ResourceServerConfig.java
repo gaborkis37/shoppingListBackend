@@ -23,7 +23,14 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-		http.addFilterBefore(new AuthServerConfig.CorsFilter(), ChannelProcessingFilter.class).authorizeRequests().anyRequest().authenticated();
+		http.addFilterBefore(new AuthServerConfig.CorsFilter(), ChannelProcessingFilter.class)
+			.authorizeRequests()
+			.antMatchers("/registration/**")
+			.permitAll()
+			.antMatchers("/activation/**")
+			.permitAll()
+			.anyRequest()
+			.authenticated();
 	}
 
 }

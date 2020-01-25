@@ -60,7 +60,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 	@Override
     public void configure(final HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/", "/login", "/oauth/**", "/oauth/token/revokeById/**", "/tokens/**").permitAll()
+                .antMatchers("/login", "/oauth/**", "/oauth/token/revokeById/**", "/tokens/**","/registration").permitAll()
                 .antMatchers("/api/users", "/api/users/**").hasAnyAuthority(Role.ADMIN.name())
                 .anyRequest().authenticated()
                 .and().formLogin().permitAll()

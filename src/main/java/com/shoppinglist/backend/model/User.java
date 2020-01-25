@@ -4,21 +4,22 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class User {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 	private String username;
 	private String email;
 	private String password;
 	@Enumerated(EnumType.STRING)
-    private Role role;
-	
-	
+	private Role role;
+	private String activation;
+	private Boolean enabled;
 
 	public User() {
 	}
@@ -62,7 +63,21 @@ public class User {
 		this.role = role;
 	}
 
+	public String getActivation() {
+		return activation;
+	}
+
+	public void setActivation(String activation) {
+		this.activation = activation;
+	}
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
 
 	
-
 }
