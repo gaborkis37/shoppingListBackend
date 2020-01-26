@@ -29,7 +29,7 @@ public class EmailService {
 			message.setFrom(MESSAGE_FROM);
 			message.setTo(email);
 			message.setSubject(MAIL_SUBJECT);
-			message.setText("Dear " +" "+ username+ "! \n \n Thank you for the registration! \n\n Welcome to the webshop"
+			message.setText("Dear " +" "+ username+ "! \n \n Thank you for the registration! \n\n Welcome to the shoppinglist application"
 					+"\n \n Please activate your registration" +"  \n \n \n   http://localhost:8080" + "/activation/"   + activation  );
 			javaMailSender.send(message);
 			
