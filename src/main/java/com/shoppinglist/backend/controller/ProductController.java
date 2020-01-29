@@ -35,14 +35,16 @@ public class ProductController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/addProduct", produces = "application/json")
-	public void saveProduct(@RequestParam("name") String name, @RequestParam("price") int price,
+	public List<Product> saveProduct(@RequestParam("name") String name, @RequestParam("price") int price,
 			Principal principal) {
 		productService.addProduct(name, price, principal.getName());
+		return productService.getProducts(principal.getName());
 	}
 
-	@RequestMapping(method = RequestMethod.DELETE, value = "/deleteProduct", produces = "application/json")
-	public void deleteProduct(@RequestParam("id") long id) {
+	@RequestMapping(method = RequestMethod.DELETE, value = "/deleteProduct/{id}", produces = "application/json")
+	public List<Product> deleteProduct(@PathVariable("id") long id, Principal principal) {
 		productService.deleteProduct(id);
+		return productService.getProducts(principal.getName());
 	}
 
 	@RequestMapping(method = RequestMethod.PUT, value = "/updateProduct", produces = "application/json")

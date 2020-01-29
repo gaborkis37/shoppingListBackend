@@ -23,8 +23,6 @@ public class Product {
 	public Product() {
 		super();
 	}
-	
-	
 
 	public Product(String name, int price, String holderName) {
 		super();
@@ -33,15 +31,11 @@ public class Product {
 		this.holderName = holderName;
 	}
 
-
-
 	public Product(String name, int price) {
 		super();
 		this.name = name;
 		this.price = price;
 	}
-	
-	
 
 	public Product(String name, int price, User user) {
 		super();
@@ -51,6 +45,10 @@ public class Product {
 	}
 	
 	
+
+	public Long getId() {
+		return id;
+	}
 
 	public String getHolderName() {
 		return holderName;
@@ -83,7 +81,5 @@ public class Product {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
-	
 
 }
