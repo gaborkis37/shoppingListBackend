@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.shoppinglist.backend.model.Product;
@@ -35,9 +35,8 @@ public class ProductController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/addProduct", produces = "application/json")
-	public List<Product> saveProduct(@RequestParam("name") String name, @RequestParam("price") int price,
-			Principal principal) {
-		productService.addProduct(name, price, principal.getName());
+	public List<Product> saveProduct(@RequestBody Product product, Principal principal) {
+		productService.addProduct(product,principal.getName());
 		return productService.getProducts(principal.getName());
 	}
 
@@ -47,10 +46,9 @@ public class ProductController {
 		return productService.getProducts(principal.getName());
 	}
 
-	@RequestMapping(method = RequestMethod.PUT, value = "/updateProduct", produces = "application/json")
-	public void updateProduct(@RequestParam("id") long id, @RequestParam("name") String name,
-			@RequestParam("price") int price) {
-		Product updateProduct = new Product(name, price);
+	@RequestMapping(method = RequestMethod.PUT, value = "/updateProduct/{id}", produces = "application/json")
+	public List<Product> updateProduct(@PathVariable("id") long id, @RequestBody Product updateProduct,Principal principal){
 		productService.editProduct(id, updateProduct);
+		return productService.getProducts(principal.getName());
 	}
 }
