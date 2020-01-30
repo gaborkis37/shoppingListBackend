@@ -36,11 +36,14 @@ public class ProductService {
 		productRepo.deleteById(id);
 	}
 
-	public void editProduct(long id, Product update) {
+	public Product editProduct(long id, Product update) {
 		Product product = productRepo.findById(id).get();
-		product.setName(update.getName());
+		if(update.getName() != null && !update.getName().trim().isEmpty() ) {
+			product.setName(update.getName());
+		}
 		product.setPrice(update.getPrice());
-		productRepo.save(product);
+		
+		return productRepo.save(product);
 	}
 
 }
