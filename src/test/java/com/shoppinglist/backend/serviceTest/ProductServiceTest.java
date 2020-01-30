@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,25 +30,24 @@ public class ProductServiceTest {
 
 	@MockBean
 	ProductRepository productRepository;
-	
-	
+
 	@Test
-	public void testAddProduct() {
+	public void testAddProductShouldAddANewProduct() {
 		Product product = new Product();
 		product.setId(1L);
 		product.setName("sajt");
 		product.setHolderName("testHolder");
 		product.setPrice(100);
 		String holderName = "testHolder";
-		
+
 		productService.addProduct(product, holderName);
-		
+
 		verify(productRepository, times(1)).save(product);
-		
+
 	}
 
 	@Test
-	public void testFindOne() {
+	public void testFindOneShouldReturnAProductById() {
 		Product product = new Product();
 		product.setId(1L);
 		product.setName("sajt");
@@ -59,7 +59,14 @@ public class ProductServiceTest {
 	}
 
 	@Test
-	public void testGetProducts() {
+	public void testFindOneShouldThrowIllegalArgumentException() {
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			productService.findOne(-1L);
+		});
+	}
+
+	@Test
+	public void testGetProductsShouldReturnAllProductsByHolderName() {
 		Product product = new Product();
 		product.setName("sajt");
 		product.setHolderName("testHolder");
@@ -80,7 +87,7 @@ public class ProductServiceTest {
 	}
 
 	@Test
-	public void testDeleteProduct() {
+	public void testDeleteProductShouldDeleteAProductById() {
 		Long id = 1L;
 
 		productService.deleteProduct(id);
@@ -89,7 +96,7 @@ public class ProductServiceTest {
 	}
 
 	@Test
-	public void testUpdateProduct() {
+	public void testUpdateProductShouldUpdateAProductsFields() {
 		Product product = new Product();
 		product.setId(1L);
 		product.setName("sajt");
