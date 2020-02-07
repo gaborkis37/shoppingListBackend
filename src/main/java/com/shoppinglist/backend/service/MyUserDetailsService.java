@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.oauth2.common.exceptions.UserDeniedAuthorizationException;
 import org.springframework.stereotype.Service;
 
 import com.shoppinglist.backend.model.MyUserPrincipal;
@@ -39,7 +38,7 @@ public class MyUserDetailsService implements UserDetailsService {
 	public String registerUser(User userToRegister) {
 		User userCheck = userRepository.findByUsername(userToRegister.getUsername());
 		if (userCheck != null) {
-			throw new UserDeniedAuthorizationException("Username already taken");
+			throw new IllegalArgumentException("Error during registration process: Username already taken");
 		}
 
 		userToRegister.setRole(Role.USER);
