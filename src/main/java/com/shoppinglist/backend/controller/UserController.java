@@ -1,5 +1,7 @@
 package com.shoppinglist.backend.controller;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +37,8 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/activation/{code}", method = RequestMethod.GET, produces = "application/json")
-	public void activation(@PathVariable("code") String code, HttpServletResponse response) {
+	public void activation(@PathVariable("code") String code, HttpServletResponse response) throws IOException {
 		userService.userActivation(code);
+		response.sendRedirect("http://localhost:4200/login");
 	}
 }
